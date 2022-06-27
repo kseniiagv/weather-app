@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="src/styles.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper1">
+        <div class="box1">
+          <h1>
+            <img id="weather-icon" src="" alt="" />
+            <span id="degrees"></span>
+            <span class="units">
+              <a href="#" class="active" id="celsius">°C</a></span
+            ><span id="vertical-bar"> |</span
+            ><span class="units"><a href="#" id="fahrenheit">°F</a></span>
+          </h1>
+          <div class="nested-box1">
+            <ul class="emojies">
+              <li>☔</li>
+              <li>💧</li>
+              <li>💨</li>
+              <li>😎</li>
+            </ul>
+            <ul class="parameters">
+              <li>Precipitation</li>
+              <li>Humidity</li>
+              <li>Wind</li>
+              <li>UV Index</li>
+            </ul>
+            <ul class="values">
+              <li><span id="precipitation"></span>%</li>
+              <li><span id="humidity"></span>%</li>
+              <li><span id="wind"></span> m/sec</li>
+              <li><span id="uv-index"></span> of 10</li>
+            </ul>
+          </div>
+        </div>
+        <div class="box2">
+          <span id="current-time-weather">
+            <span id="current-day-time"></span>
+            <br />
+            <span id="current-weather"></span
+          ></span>
+          <h2>
+            &nbsp;<span id="vertical-bar">|</span> <span id="city"></span>
+          </h2>
+          <form>
+            <div class="nested-box2">
+              <form>
+                <input
+                  type="search"
+                  placeholder="Enter the city..."
+                  id="input-city"
+                />
+                <input
+                  type="button"
+                  value="search"
+                  class="buttons"
+                  id="search-button"
+                />
+                <input
+                  type="button"
+                  value="current"
+                  class="buttons"
+                  id="current-button"
+                />
+              </form>
+            </div>
+          </form>
+          <div class="nested-box3">
+            <div>Popular:</div>
+            <div><a href="#">London</a></div>
+            <div><a href="#">New York</a></div>
+            <div><a href="#">Milan</a></div>
+            <div><a href="#">Madrid</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="wrapper2">
+        <div class="heading">
+          <div class="box3 active">
+            <a href="#" id="temp">Temperature</a>
+          </div>
+          <div class="box4">
+            <a href="#" id="prec">Precipitation</a>
+          </div>
+          <div class="box5">
+            <a href="#" id="wind">Wind</a>
+          </div>
+        </div>
+        <div class="content">
+          <a href="#" class="prev"></a>
+          <div class="hourly-forecast">
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+          </div>
+          <a href="#" class="next"></a>
+        </div>
+      </div>
+      <div class="wrapper3">
+        <div class="heading">
+          <div class="box6 active">
+            <a id="temp">Daily Forecast</a>
+          </div>
+        </div>
+        <div class="content">
+          <a href="#" class="prev"></a>
+          <div class="daily-forecast">
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+            <div>11:00<br />☀️<br />21°C</div>
+          </div>
+          <a href="#" class="next"></a>
+        </div>
+      </div>
+    </div>
+    <p class="footer"><a href="">Open-source code</a> by Kseniia Hrytsenko</p>
+    <script src="src/script.js"></script>
+  </body>
+</html>
