@@ -83,7 +83,9 @@ function parameters(response) {
   );
   weatherIcon.setAttribute("alt", response.data.current.weather[0].description);
   temperature.innerHTML = Math.round(response.data.current.temp);
-  precipitation.innerHTML = response.data.hourly[now.getHours()].pop * 100;
+  precipitation.innerHTML = Math.round(
+    response.data.hourly[now.getHours()].pop * 100
+  );
   humidity.innerHTML = Math.round(response.data.current.humidity);
   wind.innerHTML = Math.round(response.data.current.wind_speed);
   uvIndex.innerHTML = Math.round(response.data.current.uvi);
@@ -118,46 +120,54 @@ function parameters(response) {
 
 defaultCity();
 
-function inputLondon(event) {
-  event.preventDefault();
+function inputLondon() {
   let popularCity = document.querySelector("#city");
   popularCity.innerHTML = "LONDON";
 
   let apiKey = `59a6ae41a8d53cb647a89df95d0d7348`;
   let apiUrlCity = `https://api.openweathermap.org/data/2.5/weather?q=London&appid=${apiKey}`;
 
+  celsius.classList.add("active");
+  fahrenheit.classList.remove("active");
+
   axios.get(apiUrlCity).then(getCoords);
 }
 
-function inputParis(event) {
-  event.preventDefault();
+function inputParis() {
   let popularCity = document.querySelector("#city");
   popularCity.innerHTML = "PARIS";
 
   let apiKey = `59a6ae41a8d53cb647a89df95d0d7348`;
   let apiUrlCity = `https://api.openweathermap.org/data/2.5/weather?q=Paris&appid=${apiKey}`;
 
+  celsius.classList.add("active");
+  fahrenheit.classList.remove("active");
+
   axios.get(apiUrlCity).then(getCoords);
 }
 
-function inputMilan(event) {
-  event.preventDefault();
+function inputMilan() {
   let popularCity = document.querySelector("#city");
   popularCity.innerHTML = "MILAN";
 
   let apiKey = `59a6ae41a8d53cb647a89df95d0d7348`;
   let apiUrlCity = `https://api.openweathermap.org/data/2.5/weather?q=Milan&appid=${apiKey}`;
 
+  celsius.classList.add("active");
+  fahrenheit.classList.remove("active");
+
   axios.get(apiUrlCity).then(getCoords);
 }
 
-function inputMadrid(event) {
-  event.preventDefault();
+function inputMadrid() {
   let popularCity = document.querySelector("#city");
   popularCity.innerHTML = "MADRID";
 
   let apiKey = `59a6ae41a8d53cb647a89df95d0d7348`;
   let apiUrlCity = `https://api.openweathermap.org/data/2.5/weather?q=Madrid&appid=${apiKey}`;
+
+  celsius.classList.add("active");
+  fahrenheit.classList.remove("active");
 
   axios.get(apiUrlCity).then(getCoords);
 }
