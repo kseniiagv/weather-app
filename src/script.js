@@ -1,14 +1,18 @@
 let now = new Date();
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-let day = days[now.getDay()];
+let days = {
+  long: [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ],
+  short: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+};
+
+let day = days.long[now.getDay()];
 let hours = now.getHours();
 if (hours < 10) {
   hours = `0${hours}`;
@@ -20,6 +24,13 @@ if (minutes < 10) {
 
 let dayTime = document.querySelector("#current-day-time");
 dayTime.innerHTML = `${day}, ${hours}:${minutes}`;
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+
+  return days.short[day];
+}
 
 function defaultCity() {
   let defaultCity = document.querySelector("#city");
@@ -66,6 +77,7 @@ function getCoords(response) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&units=metric&appid=${apiKey}`;
 
   axios.get(apiUrl).then(parameters);
+  axios.get(apiUrl).then(displayDailyForecast);
 }
 
 function parameters(response) {
@@ -116,6 +128,28 @@ function parameters(response) {
 
   let celsius = document.querySelector("#celsius");
   celsius.addEventListener("click", changeTempCelsius);
+}
+
+function displayDailyForecast(response) {
+  let daily = response.data.daily;
+  let dailyForecast = document.querySelector(".daily-forecast");
+  let dailyForecastHTML = "";
+  daily.forEach(function (getDay, index) {
+    if (index > 0) {
+      dailyForecastHTML =
+        dailyForecastHTML +
+        `<div id="daily-forecast">
+      <div>${formatDay(getDay.dt)}</div>
+      <img src="media/weather-icons/${getDay.weather[0].icon}.svg" width="35"/>
+      <div><span id="daily-temp-max">${Math.round(
+        getDay.temp.max
+      )}°</span>&nbsp;<span id="daily-temp-min">${Math.round(
+          getDay.temp.min
+        )}°</span></div>
+      </div>`;
+    }
+  });
+  dailyForecast.innerHTML = dailyForecastHTML;
 }
 
 defaultCity();
