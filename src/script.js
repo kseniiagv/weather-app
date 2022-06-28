@@ -118,9 +118,65 @@ function parameters(response) {
 
 defaultCity();
 
+function inputLondon(event) {
+  event.preventDefault();
+  let popularCity = document.querySelector("#city");
+  popularCity.innerHTML = "LONDON";
+
+  let apiKey = `59a6ae41a8d53cb647a89df95d0d7348`;
+  let apiUrlCity = `https://api.openweathermap.org/data/2.5/weather?q=London&appid=${apiKey}`;
+
+  axios.get(apiUrlCity).then(getCoords);
+}
+
+function inputParis(event) {
+  event.preventDefault();
+  let popularCity = document.querySelector("#city");
+  popularCity.innerHTML = "PARIS";
+
+  let apiKey = `59a6ae41a8d53cb647a89df95d0d7348`;
+  let apiUrlCity = `https://api.openweathermap.org/data/2.5/weather?q=Paris&appid=${apiKey}`;
+
+  axios.get(apiUrlCity).then(getCoords);
+}
+
+function inputMilan(event) {
+  event.preventDefault();
+  let popularCity = document.querySelector("#city");
+  popularCity.innerHTML = "MILAN";
+
+  let apiKey = `59a6ae41a8d53cb647a89df95d0d7348`;
+  let apiUrlCity = `https://api.openweathermap.org/data/2.5/weather?q=Milan&appid=${apiKey}`;
+
+  axios.get(apiUrlCity).then(getCoords);
+}
+
+function inputMadrid(event) {
+  event.preventDefault();
+  let popularCity = document.querySelector("#city");
+  popularCity.innerHTML = "MADRID";
+
+  let apiKey = `59a6ae41a8d53cb647a89df95d0d7348`;
+  let apiUrlCity = `https://api.openweathermap.org/data/2.5/weather?q=Madrid&appid=${apiKey}`;
+
+  axios.get(apiUrlCity).then(getCoords);
+}
+
 let form = document.querySelector("form");
 form.addEventListener("submit", inputCity);
 form.addEventListener("click", inputCity);
 
 let current = document.querySelector("#current-button");
 current.addEventListener("click", getPosition);
+
+let popularCity1 = document.querySelector("#london");
+popularCity1.addEventListener("click", inputLondon);
+
+let popularCity2 = document.querySelector("#paris");
+popularCity2.addEventListener("click", inputParis);
+
+let popularCity3 = document.querySelector("#milan");
+popularCity3.addEventListener("click", inputMilan);
+
+let popularCity4 = document.querySelector("#madrid");
+popularCity4.addEventListener("click", inputMadrid);

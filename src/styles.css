@@ -2,7 +2,7 @@
   display: block;
   margin: 50px auto 10px;
   max-width: 60%;
-  min-width: 532px;
+  min-width: 534px;
   border: 1px solid black;
   border-radius: 5px;
   font-family: Inter;
@@ -15,7 +15,7 @@
     letter-spacing: -0.5px;
   }
   body {
-    min-width: 532px;
+    min-width: 534px;
   }
 }
 @media screen and (max-width: 1118px) {
@@ -23,7 +23,7 @@
     letter-spacing: -1px;
   }
   body {
-    min-width: 532px;
+    min-width: 534px;
   }
 }
 @media screen and (max-width: 1096px) {
@@ -31,7 +31,7 @@
     letter-spacing: -1.5px;
   }
   body {
-    min-width: 532px;
+    min-width: 534px;
   }
 }
 @media screen and (max-width: 1074px) {
@@ -39,7 +39,7 @@
     letter-spacing: -2px;
   }
   body {
-    min-width: 532px;
+    min-width: 534px;
   }
 }
 @media screen and (max-width: 1052px) {
@@ -47,7 +47,7 @@
     letter-spacing: -2.5px;
   }
   body {
-    min-width: 532px;
+    min-width: 534px;
   }
 }
 @media screen and (max-width: 1030px) {
@@ -55,7 +55,7 @@
     letter-spacing: -3px;
   }
   body {
-    min-width: 532px;
+    min-width: 534px;
   }
 }
 
@@ -183,12 +183,15 @@ ul {
 }
 
 .nested-box3 {
-  display: flex;
-  grid-template-columns: repeat(5, 1fr);
+  display: grid;
+  grid-template-columns: 50px repeat(4, auto);
   font-size: 14px;
-  grid-gap: 10px;
   margin-top: 5px;
   margin-bottom: 30px;
+}
+
+.nested-box3 a:hover {
+  font-weight: 500;
 }
 
 .wrapper2,
