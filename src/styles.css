@@ -1,7 +1,7 @@
 .container {
   display: block;
   margin: 50px auto 10px;
-  max-width: 60%;
+  max-width: 50%;
   min-width: 534px;
   border: 1px solid black;
   border-radius: 5px;
@@ -14,48 +14,30 @@
   h1 {
     letter-spacing: -0.5px;
   }
-  body {
-    min-width: 534px;
-  }
 }
 @media screen and (max-width: 1118px) {
   h1 {
     letter-spacing: -1px;
-  }
-  body {
-    min-width: 534px;
   }
 }
 @media screen and (max-width: 1096px) {
   h1 {
     letter-spacing: -1.5px;
   }
-  body {
-    min-width: 534px;
-  }
 }
 @media screen and (max-width: 1074px) {
   h1 {
     letter-spacing: -2px;
-  }
-  body {
-    min-width: 534px;
   }
 }
 @media screen and (max-width: 1052px) {
   h1 {
     letter-spacing: -2.5px;
   }
-  body {
-    min-width: 534px;
-  }
 }
 @media screen and (max-width: 1030px) {
   h1 {
     letter-spacing: -3px;
-  }
-  body {
-    min-width: 534px;
   }
 }
 
@@ -84,6 +66,10 @@ h2 {
   font-size: 45px;
   margin: 0 auto 30px;
   font-weight: 500;
+}
+
+h2 {
+  white-space: nowrap;
 }
 
 #weather-icon {
@@ -129,6 +115,7 @@ ul {
   display: grid;
   grid-template-columns: 30px 1fr 1fr;
   font-size: 15px;
+  white-space: nowrap;
 }
 
 .emojies {
@@ -267,14 +254,37 @@ ul {
   display: flex;
 }
 
-.hourly-forecast {
+.hourly-forecast,
+.daily-forecast {
   display: flex;
-  grid-template-columns: repeat(14, 1fr);
-  grid-gap: 45px;
+  grid-template-columns: repeat(7, 1fr);
+  width: 100%;
   text-align: center;
   align-self: center;
-  margin: 10px 30px;
+  justify-content: space-between;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 14px;
+}
+
+.hourly-forecast {
+  grid-template-columns: repeat(24, 1fr);
   overflow: hidden;
+}
+
+#hourly-forecast,
+#daily-forecast {
+  width: 55px;
+  flex: 0 0 14.28571428571429%;
+}
+
+#daily-temp-max {
+  color: #505050;
+  font-weight: 600;
+}
+
+#daily-temp-min {
+  color: #505050;
 }
 
 .prev::before {
@@ -315,31 +325,10 @@ ul {
   transition: all 200ms ease;
 }
 
-.daily-forecast {
-  display: flex;
-  grid-template-columns: repeat(7, 1fr);
-  width: 100%;
-  text-align: center;
-  align-self: center;
-  justify-content: space-between;
-  margin-left: 20px;
-  margin-right: 20px;
-  font-size: 14px;
-}
-
-#daily-temp-max {
-  color: #505050;
-  font-weight: 600;
-}
-
-#daily-temp-min {
-  color: #505050;
-}
-
 .footer {
   display: block;
   margin: 0 auto;
-  width: 60%;
+  width: 50%;
   font-family: Inter;
 }
 

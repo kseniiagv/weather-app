@@ -25,6 +25,16 @@ if (minutes < 10) {
 let dayTime = document.querySelector("#current-day-time");
 dayTime.innerHTML = `${day}, ${hours}:${minutes}`;
 
+function formatHour(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+
+  return hours;
+}
+
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
@@ -77,6 +87,7 @@ function getCoords(response) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&units=metric&appid=${apiKey}`;
 
   axios.get(apiUrl).then(parameters);
+  axios.get(apiUrl).then(displayHourlyForecast);
   axios.get(apiUrl).then(displayDailyForecast);
 }
 
@@ -128,6 +139,24 @@ function parameters(response) {
 
   let celsius = document.querySelector("#celsius");
   celsius.addEventListener("click", changeTempCelsius);
+}
+
+function displayHourlyForecast(response) {
+  let hourly = response.data.hourly;
+  let hourlyForecast = document.querySelector(".hourly-forecast");
+  let hourlyForecastHTML = "";
+  hourly.forEach(function (getHour, index) {
+    if (index > 0 && index < 25) {
+      hourlyForecastHTML =
+        hourlyForecastHTML +
+        `<div id="hourly-forecast">
+      <div>${formatHour(getHour.dt)}:00</div>
+      <img src="media/weather-icons/${getHour.weather[0].icon}.svg" width="35"/>
+      <div><span id="hourly-temp">${Math.round(getHour.temp)}°C</span></div>
+      </div>`;
+    }
+  });
+  hourlyForecast.innerHTML = hourlyForecastHTML;
 }
 
 function displayDailyForecast(response) {
