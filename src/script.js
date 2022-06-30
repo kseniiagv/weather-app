@@ -253,3 +253,37 @@ popularCity3.addEventListener("click", inputMilan);
 
 let popularCity4 = document.querySelector("#madrid");
 popularCity4.addEventListener("click", inputMadrid);
+
+let currentSlide = 0;
+
+function moveToRight() {
+  if (currentSlide === 17) {
+    currentSlide = 0;
+  } else {
+    currentSlide++;
+  }
+
+  let slides = document.querySelectorAll("#hourly-forecast");
+  slides.forEach(function (slide) {
+    slide.style.transform = `translateX(${-100 * currentSlide}%)`;
+  });
+}
+
+function moveToLeft() {
+  if ((currentSlide = 1)) {
+    currentSlide = 0;
+  } else {
+    currentSlide--;
+  }
+
+  let slides = document.querySelectorAll("#hourly-forecast");
+  slides.forEach(function (slide) {
+    slide.style.transform = `translateX(${-100 * currentSlide}%)`;
+  });
+}
+
+let arrowNext = document.querySelector(".next");
+arrowNext.addEventListener("click", moveToRight);
+
+let arrowPrev = document.querySelector(".prev");
+arrowPrev.addEventListener("click", moveToLeft);
