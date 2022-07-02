@@ -87,7 +87,9 @@ function getCoords(response) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&units=metric&appid=${apiKey}`;
 
   axios.get(apiUrl).then(parameters);
-  axios.get(apiUrl).then(displayHourlyForecast);
+  axios.get(apiUrl).then(displayHourlyTemperature);
+  axios.get(apiUrl).then(displayHourlyPrecipitation);
+  axios.get(apiUrl).then(displayHourlyWind);
   axios.get(apiUrl).then(displayDailyForecast);
 }
 
@@ -140,23 +142,120 @@ function parameters(response) {
   let celsius = document.querySelector("#celsius");
   celsius.addEventListener("click", changeTempCelsius);
 }
-
-function displayHourlyForecast(response) {
+function displayHourlyTemperature(response) {
   let hourly = response.data.hourly;
-  let hourlyForecast = document.querySelector(".hourly-forecast");
-  let hourlyForecastHTML = "";
+  let hourlyTemp = document.querySelector("#hourly-temp");
+  let hourlyTempHTML = "";
   hourly.forEach(function (getHour, index) {
     if (index > 0 && index < 25) {
-      hourlyForecastHTML =
-        hourlyForecastHTML +
+      hourlyTempHTML =
+        hourlyTempHTML +
         `<div id="hourly-forecast">
       <div>${formatHour(getHour.dt)}:00</div>
       <img src="media/weather-icons/${getHour.weather[0].icon}.svg" width="35"/>
-      <div><span id="hourly-temp">${Math.round(getHour.temp)}°C</span></div>
+      <div><span>${Math.round(getHour.temp)}°C</span></div>
       </div>`;
     }
   });
-  hourlyForecast.innerHTML = hourlyForecastHTML;
+  hourlyTemp.innerHTML = hourlyTempHTML;
+}
+
+function displayHourlyPrecipitation(response) {
+  let hourly = response.data.hourly;
+  let hourlyPrec = document.querySelector("#hourly-prec");
+  let hourlyPrecHTML = "";
+  hourly.forEach(function (getHour, index) {
+    if (index > 0 && index < 25) {
+      let popValue = getHour.pop;
+      if (popValue === 0) {
+        popIcon = "prec0";
+      } else if (popValue <= 0.25) {
+        popIcon = "prec1";
+      } else if (popValue <= 0.5) {
+        popIcon = "prec2";
+      } else if (popValue <= 0.75) {
+        popIcon = "prec3";
+      } else {
+        popIcon = "prec4";
+      }
+
+      hourlyPrecHTML =
+        hourlyPrecHTML +
+        `<div id="hourly-forecast">
+      <div>${formatHour(getHour.dt)}:00</div>
+      <img src="media/weather-icons/${popIcon}.svg" width="35"/>
+      <div><span>${Math.round(getHour.pop * 100)}%</span></div>
+      </div>`;
+    }
+  });
+  hourlyPrec.innerHTML = hourlyPrecHTML;
+}
+
+function displayHourlyWind(response) {
+  let hourly = response.data.hourly;
+  let hourlyWind = document.querySelector("#hourly-wind");
+  let hourlyWindHTML = "";
+  hourly.forEach(function (getHour, index) {
+    if (index > 0 && index < 25) {
+      let windSpeed = getHour.wind_speed;
+      if (windSpeed <= 3.3) {
+        windIcon = "wind1";
+      } else if (windSpeed <= 10.7) {
+        windIcon = "wind2";
+      } else if (windSpeed <= 24.4) {
+        windIcon = "wind3";
+      } else {
+        windIcon = "wind4";
+      }
+      hourlyWindHTML =
+        hourlyWindHTML +
+        `<div id="hourly-forecast">
+      <div>${formatHour(getHour.dt)}:00</div>
+      <img src="media/weather-icons/${windIcon}.svg" width="35"/>
+      <div><span>${Math.round(getHour.wind_speed * 10) / 10} m/sec</span></div>
+      </div>`;
+    }
+  });
+  hourlyWind.innerHTML = hourlyWindHTML;
+}
+
+function showTemp() {
+  tempBox.classList.add("active");
+  precBox.classList.remove("active");
+  windBox.classList.remove("active");
+
+  document.getElementById("hourly-temp").style.display = "flex";
+  document.getElementById("hourly-temp").style.position = "relative";
+  document.getElementById("hourly-prec").style.display = "none";
+  document.getElementById("hourly-prec").style.position = "absolute";
+  document.getElementById("hourly-wind").style.display = "none";
+  document.getElementById("hourly-wind").style.position = "absolute";
+}
+
+function showPrec() {
+  precBox.classList.add("active");
+  tempBox.classList.remove("active");
+  windBox.classList.remove("active");
+
+  document.getElementById("hourly-prec").style.display = "flex";
+  document.getElementById("hourly-prec").style.position = "relative";
+  document.getElementById("hourly-temp").style.display = "none";
+  document.getElementById("hourly-temp").style.position = "absolute";
+  document.getElementById("hourly-wind").style.display = "none";
+  document.getElementById("hourly-wind").style.position = "absolute";
+}
+
+function showWind() {
+  windBox.classList.add("active");
+  tempBox.classList.remove("active");
+  precBox.classList.remove("active");
+
+  document.getElementById("hourly-wind").style.display = "flex";
+  document.getElementById("hourly-wind").style.position = "relative";
+  document.getElementById("hourly-temp").style.display = "none";
+  document.getElementById("hourly-temp").style.position = "absolute";
+  document.getElementById("hourly-prec").style.display = "none";
+  document.getElementById("hourly-prec").style.position = "absolute";
 }
 
 function displayDailyForecast(response) {
@@ -253,6 +352,15 @@ popularCity3.addEventListener("click", inputMilan);
 
 let popularCity4 = document.querySelector("#madrid");
 popularCity4.addEventListener("click", inputMadrid);
+
+let tempBox = document.querySelector(".box3");
+tempBox.addEventListener("click", showTemp);
+
+let precBox = document.querySelector(".box4");
+precBox.addEventListener("click", showPrec);
+
+let windBox = document.querySelector(".box5");
+windBox.addEventListener("click", showWind);
 
 let currentSlide = 0;
 
